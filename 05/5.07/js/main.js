@@ -63,7 +63,7 @@ d3.json("data/revenues.json").then(function(data){
     });
 
     d3.interval(function(){
-        var newData = flag ? data : data.slice(1);
+        var newData = flag ? data : data.slice(1); // No profit data for January
 
         update(newData)
         flag = !flag

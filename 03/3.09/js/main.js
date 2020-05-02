@@ -11,8 +11,8 @@ var width = 600 - margin.left - margin.right,
 
 var g = d3.select("#chart-area")
     .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width + margin.left + margin.right) // 600
+        .attr("height", height + margin.top + margin.bottom) // 400
     .append("g")
         .attr("transform", "translate(" + margin.left 
             + ", " + margin.top + ")")
