@@ -30,7 +30,7 @@ const yScale = d3.scaleLinear()
 // area of circle scale with population domain
 const area = d3.scaleLinear()
     .range([25*Math.PI, 1500*Math.PI]) // How was this determined?
-    .domain([2000, 1400000000]); // This fits within extent(s) that I show in my diagnostic function.
+    .domain([2000, 1400000000]); // This fits within extent(s) for population that I found.
 // Ordinal scale
 const continentColor = d3.scaleOrdinal(d3.schemePastel1);
 
@@ -57,11 +57,11 @@ chart.append("text")
     .text("GDP Per Capita ($)");
 // Y Label
 const yLabel = chart.append("text")
-    .attr("y", -50)
+		.attr("transform", "rotate(-90)") // helps to put rotate first to understand x,y attrs
+    .attr("y", -40)
     .attr("x", -(height / 2))
     .attr("font-size", "20px")
     .attr("text-anchor", "middle")
-    .attr("transform", "rotate(-90)")
 		.text("Life Expectancy (Years)");	
 // Year Display
 const yearDisp = chart.append("text")
@@ -69,14 +69,14 @@ const yearDisp = chart.append("text")
 	.attr("x", width)
 	.attr("font-size", "40px")
 	.attr("text-anchor", "end")
-	.style("fill", "grey");
+	.attr("opacity", "0.4");
 
 // Legend
 const continents = ["europe", "asia", "americas", "africa"];
 const legend = chart.append("g")
-	.attr("transform", "translate(" + (width - 10) + ", " + (height - 125) +")");
+	.attr("transform", `translate(${width - 10}, ${height - 125})`);
 
-continents.forEach((continent, i) => {
+continents.forEach((continent, i) => { // continent key is identical string in both data and continent array
 	let legendRow = legend.append("g")
 		.attr("transform", `translate(${0}, ${i * 20})`);
 
@@ -162,7 +162,7 @@ d3.json("data/data.json").then((data) => {
 	});
 
 	// first time
-	update(formattedData[0], data[0].year);
+	update(formattedData[0], data[0].year); // or use 1800 - iter
 
 }).catch((err) => {
 	console.log(err);
